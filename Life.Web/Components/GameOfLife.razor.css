@@ -1,0 +1,32 @@
+﻿.board {
+    display: grid;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    user-select: none;
+}
+
+.cell {
+    border: 1px solid #eee;
+    background: #fff;
+    transition: background .06s ease-in;
+}
+
+    .cell.alive {
+        background: #222;
+    }
+
+.play-button {
+    width: 15%;
+}
+
+    .play-button:hover {
+        filter: drop-shadow(0 0 10px var(--middle-green)) drop-shadow(0 0 30px var(--middle-green));
+    }
+
+.stop-button {
+    width: 15%;
+}
+
+    .stop-button:hover {
+        filter: drop-shadow(0 0 10px var(--neon-red)) drop-shadow(0 0 30px var(--neon-red));
+    }

@@ -1,0 +1,92 @@
+:root {
+    --pastel-green: #ceead6;
+    --light-green: #a2d9b0;
+    --middle-green: #4eb76a;
+    --dark-green: #30773d;
+    --neon-green: #39FF14;
+    --pastel-blue: #B3EBF2;
+    --middle-blue: #2596be;
+    --orange: #ee9948;
+    --red: #dc3545;
+    --purple: #683df5;
+    --neon-red: #e50914;
+}
+
+html, body {
+    font-family: 'Poppins', Helvetica, sans-serif;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    background-color: var(--pastel-green);
+}
+
+.cl-pastel-green {
+    color: var(--pastel-green) !important;
+}
+
+.cl-light-green {
+    color: var(--light-green) !important;
+}
+
+.cl-middle-green {
+    color: var(--middle-green) !important;
+}
+
+.cl-dark-green {
+    color: var(--dark-green) !important;
+}
+.bg-pastel-green {
+    background-color: var(--pastel-green) !important;
+}
+
+.bg-light-green {
+    background-color: var(--light-green) !important;
+}
+
+.bg-middle-green {
+    background-color: var(--middle-green) !important;
+}
+
+.bg-dark-green {
+    background-color: var(--dark-green) !important;
+}
+
+.bg-pastel-blue {
+    background-color: var(--pastel-blue) !important;
+}
+
+.bg-middle-blue {
+    background-color: var(--middle-blue) !important;
+}
+
+.bg-orange {
+    background-color: var(--orange) !important;
+}
+
+.bg-light-gray {
+    background-color: var(--light-gray) !important;
+}
+
+.bg-dark-gray {
+    background-color: var(--dark-gray) !important;
+}
+
+.bg-neon-red {
+    background: var(--neon-red)
+}
+
+.bg-red {
+    background-color: var(--red) !important;
+}
+
+.bg-dark-red {
+    background-color: var(--dark-red) !important;
+}
+
+.bg-yellow {
+    background-color: var(--yellow) !important;
+}
+
+.bg-purple {
+    background-color: var(--purple) !important;
+}

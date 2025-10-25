@@ -1,0 +1,129 @@
+﻿@using Life.Core
+@using Life.Core.Models
+@using Life.Core.Models.Values
+@using Life.Core.Services
+
+<div class="board bg-white shadow rounded-5 p-3" style="grid-template-columns: repeat(@Columns, 1fr); width:@(Columns* CellSize)px; height:@(Rows* CellSize)px;">
+    @for (var r = 0; r < Rows; r++)
+    {
+        for (var c = 0; c < Columns; c++)
+        {
+            var alive = _grid[r, c] == CellState.Alive;
+            <div class="cell @(alive ? "alive" : "")"
+                 style="width:@CellSize}px;height:@CellSize}px"
+                 @onclick="@(() => Toggle(r, c))"
+                 title="@($"{r},{c}")">
+            </div>
+        }
+    }
+</div>
+
+<section>
+    <div class="row justify-content-center text-center p-3">
+        @if (_isRunning)
+        {
+            <button class="px-3 py-1 bg-neon-red text-white rounded-5 border-0 shadow fs-2 text-center stop-button"
+                    @onclick="ToggleRun">
+                <i class="fa-solid fa-stop text-white fs-3"></i>
+            </button>
+        }
+        else
+        {
+            <button class="px-3 py-1 bg-middle-green text-white rounded-5 border-0 shadow fs-2 text-center play-button"
+                    @onclick="ToggleRun">
+                <i class="fas fa-play fs-3"></i>
+            </button>
+        }
+    </div>
+    <div class="row justify-content-center text-center p-3 d-flex flex-row">
+        <div class="col">
+            <button title="Pulisci" class="px-3 py-1 bg-orange text-white rounded-5 border-0 shadow fs-5 text-center" @onclick="Clear" disabled="@_isRunning">
+                <i class="fas fa-arrow-rotate-left fs-5"></i>
+            </button>
+            <button title="Genera casuale" class="px-3 py-1 bg-purple text-white rounded-5 border-0 shadow fs-5 text-center" @onclick="Randomize" disabled="@_isRunning">
+                <i class="fas fa-dice fs-5"></i>
+            </button>
+            <button title="Prossima genrazione" class="px-3 py-1 bg-middle-blue text-white rounded-5 border-0 shadow fs-5 text-center" @onclick="Step" disabled="@_isRunning">
+                <i class="fas fa-forward fs-5"></i>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+@code {
+    [Parameter] public int Rows { get; set; } = 40;
+    [Parameter] public int Columns { get; set; } = 60;
+    [Parameter] public double AliveProbability { get; set; } = 0.25;
+    [Parameter] public int CellSize { get; set; } = 12;
+    [Parameter] public int SpeedMilliseconds { get; set; } = 100;
+
+    private CellState[,] _grid = default!;
+    private PeriodicTimer? _timer;
+    private bool _isRunning;
+    private int _speedMilliseconds;
+
+    protected override void OnInitialized()
+    {
+        _speedMilliseconds = SpeedMilliseconds;
+        _grid = GameService.Random(new GameGrid(Rows, Columns), AliveProbability);
+        StartTimer();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (_speedMilliseconds != SpeedMilliseconds)
+        {
+            _speedMilliseconds = SpeedMilliseconds;
+            StartTimer();
+        }
+    }
+
+    private void StartTimer()
+    {
+        _timer?.Dispose();
+        _timer = new PeriodicTimer(TimeSpan.FromMilliseconds(_speedMilliseconds));
+        _ = RunLoopAsync();
+    }
+
+    private async Task RunLoopAsync()
+    {
+        while (await _timer!.WaitForNextTickAsync())
+        {
+            if (_isRunning)
+            {
+                _grid = GameService.Next(_grid);
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void ToggleRun() => _isRunning = !_isRunning;
+
+    private void Step()
+    {
+        if (!_isRunning)
+        {
+            _grid = GameService.Next(_grid);
+        }
+    }
+
+    private void Randomize()
+    {
+        _grid = GameService.Random(new GameGrid(Rows, Columns), AliveProbability);
+    }
+
+    private void Clear()
+    {
+        var grid = new CellState[Rows, Columns];
+        _grid = grid;
+    }
+
+    private void Toggle(int row, int column)
+    {
+        _grid[row, column] = _grid[row, column] == CellState.Alive ? CellState.Dead : CellState.Alive;
+    }
+
+
+    public void Dispose() => _timer?.Dispose();
+}
