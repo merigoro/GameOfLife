@@ -30,3 +30,16 @@
     .stop-button:hover {
         filter: drop-shadow(0 0 10px var(--neon-red)) drop-shadow(0 0 30px var(--neon-red));
     }
+button:disabled {
+    background-color: #d1d5db !important; 
+    color: #6b7280 !important; 
+    border-color: #cbd5e1 !important;
+    cursor: not-allowed;
+    filter: none !important;
+    box-shadow: none !important;
+    opacity: 0.85; 
+}
+
+    button:disabled i {
+        color: #6b7280 !important;
+    }
