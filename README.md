@@ -1,5 +1,5 @@
 # Game of life
-Questa è la implementazione per il "**Game of life di Conway**" ([http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life](http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)).
+Questa è la mia implementazione per il "**Game of life di Conway**" ([http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life](http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)).
 
 Le regole sono:
 1. Qualsiasi cella viva con meno di due celle vive adiacenti muore, come per effetto d'isolamento;
