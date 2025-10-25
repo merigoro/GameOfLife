@@ -3,16 +3,19 @@
     border: 1px solid #ddd;
     box-shadow: 0 1px 4px rgba(0,0,0,.06);
     user-select: none;
+
 }
 
 .cell {
+    box-sizing: border-box;
     border: 1px solid #eee;
     background: #fff;
     transition: background .06s ease-in;
+    cursor: pointer;
 }
 
     .cell.alive {
-        background: #222;
+        background: var(--dark-green);
     }
 
 .play-button {
