@@ -5,7 +5,10 @@ namespace Life.Core.Services;
 
 public static class GameService
 {
-    public static CellState[,] Random(GameGrid size, double aliveProbability = 0.25, int? seed = null)
+    public static CellState[,] Random(
+        GameGrid size,
+        double aliveProbability = 0.25,
+        int? seed = null)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(size.Rows);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(size.Cols);
@@ -19,7 +22,8 @@ public static class GameService
         return grid;
     }
 
-    public static CellState[,] Next(CellState[,] current)
+    public static CellState[,] Next(
+        CellState[,] current)
     {
         var rows = current.GetLength(0);
         var columns = current.GetLength(1);
@@ -46,7 +50,11 @@ public static class GameService
     }
 
     private static int CountAliveNeighbors(
-        CellState[,] grid, int row, int col, int rowCount, int colCount)
+        CellState[,] grid,
+        int row,
+        int col,
+        int rowCount,
+        int colCount)
     {
         var aliveCount = 0;
 

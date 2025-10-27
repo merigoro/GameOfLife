@@ -9,11 +9,12 @@
         grid-auto-rows: @(CellSize)px;
         width: fit-content;
         height: fit-content;">
-    @for (var r = 0; r < Rows; r++)
+    @for (var row = 0; row < Rows; row++)
     {
-        for (var c = 0; c < Columns; c++)
+        for (var column = 0; column < Columns; column++)
         {
-            var rr = r; var cc = c;
+            var rr = row;
+            var cc = column;
             var alive = _grid[rr, cc] == CellState.Alive;
 
             <div class="cell @(alive ? "alive" : "")"
@@ -107,10 +108,9 @@
 
     private void Step()
     {
-        if (!_isRunning)
-        {
-            _grid = GameService.Next(_grid);
-        }
+        if (_isRunning) return;
+
+        _grid = GameService.Next(_grid);
     }
 
     private void Randomize()
