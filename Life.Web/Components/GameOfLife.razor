@@ -89,10 +89,10 @@
     {
         _timer?.Dispose();
         _timer = new PeriodicTimer(TimeSpan.FromMilliseconds(_speedMilliseconds));
-        _ = RunLoopAsync();
+        _ = RunLoop();
     }
 
-    private async Task RunLoopAsync()
+    private async Task RunLoop()
     {
         while (await _timer!.WaitForNextTickAsync())
         {
